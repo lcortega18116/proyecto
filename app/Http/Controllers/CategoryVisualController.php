@@ -19,7 +19,10 @@ class CategoryVisualController extends Controller
             'categories' => Category::all(),
         ]);
     }
-
+    public function index2()
+    {
+        return Categories::all();
+    }
     /**
      * Show the form for creating a new resource.
      */

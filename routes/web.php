@@ -7,14 +7,15 @@ use App\Http\Controllers\CategoryVisualController;
 use App\Http\Controllers\ShoeVisualController;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+Route ::get('/', [ShoeVisualController::class, 'index2']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

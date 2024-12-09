@@ -25,6 +25,8 @@ class ShoeController extends Controller
                 'description' => $shoe->description,
                 'price' => $shoe->price,
                 'stock' => $shoe->stock,
+                'slug' => $shoe->slug,
+                'image' => $shoe->image,
                 'category' => $shoe->category->name
             ];
         });
@@ -38,8 +40,16 @@ class ShoeController extends Controller
     public function store(StoreShoeRequest $request)
     {
         //
-        Log::debug ($request->all());
-        return Shoe::create($request->all());
+        $shoe = new Shoe();
+        $shoe->name = $request->name;
+        $shoe->description = $request->description;
+        $shoe->price = $request->price;
+        $shoe->stock = $request->stock;
+        $shoe->slug = $request->name;
+        $shoe->image = $request->image;
+        $shoe->category_id = $request->category_id;
+        $shoe->save();
+        return $shoe;
         
     }
 

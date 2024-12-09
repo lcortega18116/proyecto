@@ -24,6 +24,14 @@ class ShoeVisualController extends Controller
         ]);
     }
 
+    public function index2()
+    {
+        return Inertia::render('Welcome', [
+            'shoes' => Shoe::with('category')->get(),
+            'categories' => Category::all()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
