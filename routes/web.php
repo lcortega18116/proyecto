@@ -30,7 +30,7 @@ Route::put('/categories/{category}', [CategoryVisualController::class, 'update']
 Route::delete ('/shoes/{shoe}', [ShoeVisualController::class, 'destroy']) ->name('Shoes.destroy');
 Route::get('/shoes/{shoe}', [ShoeVisualController::class, 'edit'])->name('Shoes.edit');
 
-Route::put('/shoes/{shoe}', [ShoeController::class, 'update'])->name('Shoes.update');
+Route::post('/shoes/{shoe}', [ShoeVisualController::class, 'update'])->name('Shoes.update');
 
 //slug
 Route::get('/shoes/{slug}', [ShoeVisualController::class, 'show'])->name('shoes.show');

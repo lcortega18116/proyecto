@@ -7,7 +7,7 @@ import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
 
 export default function UpdateShoe({ categories, shoe }) {
-    const { data, setData, put, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm({
         name: shoe.name || '',
         description: shoe.description || '',
         price: shoe.price || '',
@@ -36,7 +36,7 @@ export default function UpdateShoe({ categories, shoe }) {
 
     const submit = (e) => {
         e.preventDefault();
-
+        
         const formData = new FormData();
         formData.append('name', data.name);
         formData.append('description', data.description);
@@ -47,9 +47,10 @@ export default function UpdateShoe({ categories, shoe }) {
         if (data.image) {
             formData.append('image', data.image);
         }
+        console.log('Datos enviados:', {formData});
 
         // Use PUT method to update existing shoe
-        put(route('Shoes.update',shoe.id ), {
+        post(route('Shoes.update',shoe.id ), {
             data: formData,
             forceFormData: true,
             onFinish: () => reset('name', 'description', 'price', 'stock', 'category_id', 'image'),
@@ -183,12 +184,12 @@ export default function UpdateShoe({ categories, shoe }) {
                                             
                                             <div className="flex text-sm text-gray-600">
                                                 <label 
-                                                    htmlFor="file-upload" 
+                                                    htmlFor="image" 
                                                     className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                                                 >
                                                     <span>Upload a file</span>
                                                     <input 
-                                                        id="file-upload" 
+                                                        id="image" 
                                                         name="image" 
                                                         type="file" 
                                                         className="sr-only" 

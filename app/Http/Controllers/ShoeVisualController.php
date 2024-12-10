@@ -112,7 +112,7 @@ class ShoeVisualController extends Controller
      */
     public function update(UpdateShoeRequest $request, Shoe $shoe)
     {
-        Log::info('Shoe update request: ', $request->all());
+        Log::info('Shoe update request: ', $request->request->all());
         try {
             // Validate the incoming request data
             $shoeData = $request->request->all();
