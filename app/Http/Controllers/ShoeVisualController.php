@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Mail\StoreShoeMail;
 use Illuminate\Support\Str;
+use App\Http\Requests\StoreShoeRequest;
+use App\Http\Requests\UpdateShoeRequest;
 
 class ShoeVisualController extends Controller
 {
@@ -33,8 +35,20 @@ class ShoeVisualController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(String $slug)
+    {
+        $shoe = Shoe::where('slug', $slug)->firstOrFail();
+        $shoe->load('category');
+        return Inertia::render('Shoes/show', [
+            'shoe' => $shoe,
+        ]);
+    }
+    /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
         return Inertia::render('Shoes/create', [
@@ -43,17 +57,9 @@ class ShoeVisualController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request)
-    // {
-    //     Mail::to($request->user())->send(new StoreShoeMail($shoe));
-    // }
-
-    /**
      * Display the specified resource.
      */
-    public function store(Request $request)
+    public function store(StoreShoeRequest $request)
     {
         try {
             // Validate the incoming request data
@@ -104,8 +110,9 @@ class ShoeVisualController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Shoe $shoe)
+    public function update(UpdateShoeRequest $request, Shoe $shoe)
     {
+        Log::info('Shoe update request: ', $request->all());
         try {
             // Validate the incoming request data
             $shoeData = $request->request->all();

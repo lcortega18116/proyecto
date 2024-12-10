@@ -10,6 +10,10 @@ export default function Index({categories}) {
         // Navigate to the edit page for the specific category
         router.get(route('Categories.edit', category.id));
     };
+    const handleShow = (category) => {
+        // Navigate to the show page for the specific category
+        router.get(route('Categories.show', category.name));
+    };
     
     const handleDelete = (category) => {
         if (window.confirm(`Are you sure you want to delete the category "${category.name}"?`)) {
@@ -64,6 +68,12 @@ export default function Index({categories}) {
                                                     <td className="px-6 py-4">{category.priority}</td>
                                                     <td className="px-6 py-4">
                                                         <div className="flex space-x-2">
+                                                            <button 
+                                                                    onClick={() => handleShow(category)}
+                                                                    className=".px-3 py-2 rounded-md hover:bg-green-500 hover:text-white bg-green-200 text-gray-600"
+                                                                >
+                                                                    View Details
+                                                            </button>
                                                             <button 
                                                                 onClick={() => handleEdit(category)}
                                                                 className="bg-blue-500 text-white px-3 py-1.5 rounded-md hover:bg-blue-600 transition-colors text-sm"

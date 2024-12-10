@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Category;
+use App\Models\Shoe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StoreCategoryMail;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryVisualController extends Controller
 {
@@ -19,9 +22,15 @@ class CategoryVisualController extends Controller
             'categories' => Category::all(),
         ]);
     }
-    public function index2()
+    public function show(String $slug)
     {
-        return Categories::all();
+        $category = Category::where('name', $slug)->first();
+        $shoes = Shoe::where('category_id', $category->id)->get();
+        return Inertia::render('Categories/show', [
+            'category' => $category,
+            'shoes' => $shoes,
+
+        ]);
     }
     /**
      * Show the form for creating a new resource.
@@ -34,7 +43,7 @@ class CategoryVisualController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
         try {
             $category = Category::create($request->all());
@@ -45,14 +54,6 @@ class CategoryVisualController extends Controller
             // Handle potential errors during creation
             return to_route('Categories.index')->with('error', 'Unable to create the category.');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        //
     }
 
     /**
@@ -68,7 +69,7 @@ class CategoryVisualController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         try {
             $category->update($request->all());

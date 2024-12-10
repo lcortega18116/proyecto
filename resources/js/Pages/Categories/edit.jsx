@@ -5,7 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm, usePage } from '@inertiajs/react';
 
-export default function Edit({ category }) {
+export default function EditCategory({ category }) {
     const { data, setData, put, processing, errors, reset } = useForm({
         name: category.name || '',
         description: category.description || '',

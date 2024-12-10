@@ -32,13 +32,13 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </NavLink>
                                 <NavLink
                                     href={route('Categories.index')}
-                                    active={route().current('categories.*')}
+                                    active={route().current('Categories.*')}
                                 >
                                     Categories
                                 </NavLink>
                                 <NavLink
                                     href={route('Shoes.index')}
-                                    active={route().current('shoes.*')}
+                                    active={route().current('Shoes.*')}
                                 >
                                     Shoes
                                 </NavLink>
@@ -145,6 +145,22 @@ export default function AuthenticatedLayout({ header, children }) {
                             active={route().current('dashboard')}
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+                    </div>
+                    <div className="space-y-1 pb-3 pt-2">
+                        <ResponsiveNavLink
+                            href={route('Categories.index')}
+                            active={route().current('categories.*')}
+                        >
+                            Categories
+                        </ResponsiveNavLink>
+                    </div>
+                    <div className="space-y-1 pb-3 pt-2">
+                        <ResponsiveNavLink
+                            href={route('Shoes.index')}
+                            active={route().current('shoes.*')}
+                        >
+                            Shoes
                         </ResponsiveNavLink>
                     </div>
 

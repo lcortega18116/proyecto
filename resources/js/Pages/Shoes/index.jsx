@@ -9,8 +9,12 @@ export default function ShoesIndex({ shoes, categories }) {
         ? shoes.filter(shoe => shoe.category_id === selectedCategory)
         : shoes;
     const handleEdit = (shoe) => {
-        // Navigate to the edit page for the specific category
+        // Navigate to the edit page
         router.get(route('Shoes.edit', shoe.id));
+    };
+    const handleShow = (shoe) => {
+        // Navigate to the show page whit slug
+        router.get(route('Shoes.show', shoe.slug));
     };
     
     const handleDelete = (shoe) => {
@@ -121,7 +125,7 @@ export default function ShoesIndex({ shoes, categories }) {
                                         {/* Action Buttons */}
                                         <div className="mt-4 flex space-x-2">
                                             <button 
-                                                    onClick={() => router.get(route('Shoes.show', shoe.slug))}
+                                                    onClick={() => handleShow(shoe)}
                                                     className="flex-1 px-3 py-2 rounded-md hover:bg-green-500 hover:text-white bg-green-200 text-gray-800"
                                                 >
                                                     View Details

@@ -14,7 +14,6 @@ export default function UpdateShoe({ categories, shoe }) {
         stock: shoe.stock || '',
         category_id: shoe.category_id || '',
         image: null,
-        _method: 'PUT' // Add this for proper method spoofing in Laravel
     });
 
     const [previewImage, setPreviewImage] = useState(null);
@@ -50,7 +49,7 @@ export default function UpdateShoe({ categories, shoe }) {
         }
 
         // Use PUT method to update existing shoe
-        put(route('Shoes.update', { shoe: shoe.id }), {
+        put(route('Shoes.update',shoe.id ), {
             data: formData,
             forceFormData: true,
             onFinish: () => reset('name', 'description', 'price', 'stock', 'category_id', 'image'),
@@ -155,7 +154,6 @@ export default function UpdateShoe({ categories, shoe }) {
                                     </div>
                                 </div>
 
-                                {/* Right Column - Image Upload */}
                                 <div>
                                     <InputLabel htmlFor="image" value="Shoe Image" />
                                     <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">

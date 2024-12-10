@@ -13,10 +13,7 @@ class ShoeController extends Controller
      */
     public function index()
     {
-        // return Shoe::with('category')->get();
-        // return Shoe::with(['category:id,name'])->get();
-        //retornar solo el nombre de la categoria
-        // return Shoe::with('category:id,name')->get();
+       
         $shoe = Shoe::with('category:id,name')->get();
         $newshoe = $shoe->map(function($shoe){
             return [
